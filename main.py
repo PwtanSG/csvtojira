@@ -76,11 +76,8 @@ if __name__ == '__main__':
         find_qn = is_qn_no_in_jira(csv_row['QN no.'], jira_qn_dic_list)
         if find_qn['result']:
             # existing QN, edit record in Jira
-            print(find_qn['record']['key'])
-            print(csv_row['QN no.'] + ' in jira ' + csv_row['Title'] + '-' + csv_row['Description'])
             jira_module.jira_edit_issue(find_qn['record']['key'], csv_row)
         else:
-            print('new')
             # new QN create record in Jira
-            # jira_module.jira_create_issue(row)
+            jira_module.jira_create_issue(csv_row)
     print('Completed script...')
