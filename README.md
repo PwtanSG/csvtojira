@@ -8,7 +8,7 @@ The JiraIssue class represents an individual Jira Issue with the following attri
 key: The key of the Quality Issue. \
 summary: The age of the Quality Issue. \
 description: The description of the Quality Issue. \
-qn_no: Quality Issue notification number (using Jira Customed field) \
+qn_no: Quality Issue notification number (using Jira Customed field) 
 
 # JiraManager
 The JiraManager class is responsible for managing a list of employees. It offers functionalities to:
@@ -16,7 +16,7 @@ The JiraManager class is responsible for managing a list of employees. It offers
 Add a new Quality Issue to JIRA project. \
 List all existing Quality Issues in JIRA project. \
 Update an Quality Issue details by Issue key. \
-Find a Quality Issue by Quality Issue notification no.(QN_No.). \
+Find a Quality Issue by Quality Issue notification no.(QN_No.). 
 
 
 ### reference 
