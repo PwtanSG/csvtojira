@@ -23,13 +23,13 @@ class JiraIssue:
         self._summary = summary_text
 
     @qn_no.setter
-    def qn_no(self, desc_text):
+    def qn_no(self, qn_num_):
         regex = r"^[Qq][Nn][0-9]{7}$"
-        if not desc_text:
+        if not qn_num_:
             raise Exception("qn_no cannot be empty")
-        if not re.match(regex, desc_text):
+        if not re.match(regex, qn_num_):
             raise Exception("qn_no invalid")
-        self._qn_no = desc_text
+        self._qn_no = qn_num_
 
     # def __str__(self):
     #     return f'Issue {self.key} has age {self.title}'
