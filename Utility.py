@@ -12,7 +12,7 @@ def check_file_exist(qa_file_pathname):
     if qa_file_pathname:
         filepath = pathlib.Path(qa_file_pathname)
         if filepath.exists():
-            print(filepath)
+            # print(filepath)
             return filepath.exists()
         else:
             print(f"Abort : File path/name not found - {qa_file_pathname}")
@@ -121,6 +121,7 @@ def is_qn_no_in_jira(qn_no, jira_qn_dict_list_):
 
 
 def check_response(func_name, response):
+    # print(f'{func_name} - status code : {response.status_code} {response.text}')
     if response.status_code >= 400:
         print(f'{func_name} - status code : {response.status_code}')
         if response.text:
@@ -128,14 +129,15 @@ def check_response(func_name, response):
                 data = json.loads(response.text)
                 if isinstance(data, dict):
                     for key in data:
-                        print(f'{key} : {data[key]}')
+                        if key != 'JIRA_CLOUD_ID':
+                            print(f'{key} : {data[key]}')
                 else:
                     print(response.text)
                 # print(data['errorMessages'], f'Error: {response.status_code}{response.text}')['errorMessage' in data]
             except:
                 print(f'Error: {response.status_code}')
-        exit(1)
-    return
+        return {"result": False, "status_code": response.status_code}
+    return {"result": True, "status_code": response.status_code}
 
 
 def find_qn_in_jira(jira_issues_list, csv_row_qn_no):

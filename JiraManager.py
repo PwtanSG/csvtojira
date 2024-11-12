@@ -45,7 +45,9 @@ class JiraManager:
             params=query,
             auth=auth
         )
-        Utility.check_response('jira_get_all_issues', response)
+        res = Utility.check_response('jira_get_all_issues', response)
+        if not res['result']:
+            exit(1)
         data = json.loads(response.text)
 
         for issue in data['issues']:
@@ -122,8 +124,10 @@ class JiraManager:
 
         # data = json.loads(response.text)
         # print(response)
-        # Utility.check_response(self.jira_get_issue.__name__, response)
-        print(response)
+        res = Utility.check_response("jira_edit_issue", response)
+        msg_ = f"Edit {jira_issue_key} : {res['status_code']}"
+        print(msg_ + " - successful.") if res['result'] else print(msg_ + "unsuccessful.")
+        return res
 
     @staticmethod
     def jira_create_issue(df_row):
@@ -174,4 +178,7 @@ class JiraManager:
 
         # data = json.loads(response.text)
         # print(response)
-        print(response)
+        res = Utility.check_response("jira_create_issue", response)
+        msg_ = f"Create {df_row['QN no.']} : {res['status_code']}"
+        print(msg_ + " - successful.") if res['result'] else print(msg_ + "unsuccessful.")
+        return res
