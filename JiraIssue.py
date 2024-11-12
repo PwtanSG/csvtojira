@@ -1,8 +1,9 @@
+import json
 import re
 
 
 class JiraIssue:
-    def __init__(self, key: str, summary: str, qn_no: str, description: str):
+    def __init__(self, key: str, summary: str, qn_no: str, description: dict):
         self.key = key
         self.summary = summary
         self.qn_no = qn_no
