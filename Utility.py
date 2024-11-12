@@ -3,6 +3,8 @@ import pandas as pd
 import pathlib
 import numpy as np
 
+from JiraIssue import JiraIssue
+
 required_cols = ['QN no.', 'Title', 'Description']
 
 
@@ -142,3 +144,17 @@ def find_qn_in_jira(jira_issues_list, csv_row_qn_no):
         return {'result': True, 'record': result_list[0]}
     else:
         return {'result': False, 'record': []}
+
+
+def compare_data_row_csv_jira(csv_row_, jira_issue_):
+    """
+    This compare a single csv record with the corresponding jira project issue of following fields
+    qn_no, title=summary, description
+    :param csv_row_: pandas series - row records in csv file
+    :param jira_issue_: class datatype JiraIssue - issue from jira record
+    :return: True if no changes
+    """
+    jira_issue_desc_text = jira_issue_.description['content'][0]['content'][0]['text']
+    return jira_issue_.qn_no == csv_row_[required_cols[0]] and jira_issue_.summary == csv_row_['Title'] \
+        and jira_issue_desc_text == csv_row_['Description']
+
