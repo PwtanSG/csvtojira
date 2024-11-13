@@ -18,6 +18,15 @@ List all existing Quality Issues in JIRA project. \
 Update an Quality Issue details by Issue key. \
 Find a Quality Issue by Quality Issue notification no.(QN_No.). 
 
+## Setup
+### environment variable
+Create Environment variables as follows and saved as .env file. Refer to .env_example.
+JIRA_PROJECT_KEY=
+JIRA_USER=
+JIRA_API_TOKEN=
+JIRA_CLOUD_ID=
+JIRA_CLOUD_API_ENDPOINT=
+JIRA_CUSTOM_FIELD_QN_NO=
 
 ### reference 
 JIRA REST API https://docs.atlassian.com/software/jira/docs/api/REST/1000.824.0/
