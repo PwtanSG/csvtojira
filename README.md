@@ -1,6 +1,8 @@
 # Introduction
+Jira has a import csv function but at that point in time, Jira was not able to automate in as batch job to daily upload new records in csv into Jira without human intervention.
+
 The CSV to Jira Quality Issue Project demonstrates the implementation of JIRA Cloud REST API in Python to create/update JIRA issues based on the 
-list of Quality Issue records in CSV file
+list of Quality Issue records in CSV file. 
 
 ## JiraIssue
 The JiraIssue class represents an individual Jira Issue with the following attributes:
