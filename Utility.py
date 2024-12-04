@@ -51,6 +51,12 @@ def check_no_duplicated_qn_no(qa_file_pathname, qa_file_df):
 
 
 def validate_qn_no_column(df_, column_to_validate):
+    """
+    validate QN no. format - 9 char long, prefix with 'QN' and 7 digit (e.g QN1234567)
+    :param df_:
+    :param column_to_validate:
+    :return:none
+    """
     pattern = r"^[Qq][Nn][0-9]{7}$"
     # invalid_values = df_[column_to_validate][~df_[column_to_validate].astype(str).str.match(pattern, na=False)]
     invalid_values = df_[column_to_validate].str.match(pattern)
