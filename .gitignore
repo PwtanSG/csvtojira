@@ -162,9 +162,14 @@ cython_debug/
 #.idea/
 
 # Sample example QA CSV file - ignore all others working QA files except sample file
+<<<<<<< Updated upstream
 #!csv
 csv/*
 !csv/QA_EXAMPLE_FILE.csv
 
 #ignore log files
 #!log
+=======
+csv
+!csv/QA_EXAMPLE_FILE
+>>>>>>> Stashed changes
