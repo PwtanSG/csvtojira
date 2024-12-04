@@ -78,12 +78,15 @@ def validate_qn_no_column(df_, column_to_validate):
 
 
 def read_qa_csvfile_get_df(qa_filename):
+    print(f"Reading file : {qa_filename}")
     check_file_exist(qa_filename)
 
     df = pd.read_csv(qa_filename, usecols=required_cols)
     if df.empty:
         print('No data in ' + qa_filename)
         exit(1)
+
+    print(f"{qa_filename} : {len(df)} records")
 
     check_column_value_empty(df, required_cols[0])
 
@@ -176,7 +179,6 @@ def get_cmd_main_fn_arg(default_fn, argv):
     rtn_fn = default_fn
     n = len(argv)
     if n > 1 and argv[0] == "main.py":
-        print(f"{argv[0]}")
         arg1 = argv[1]
         if arg1.endswith("csv"):
             rtn_fn = arg1

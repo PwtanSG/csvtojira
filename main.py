@@ -28,7 +28,6 @@ if __name__ == '__main__':
     jira_manager = JiraManager()
 
     qa_file_df = Utility.read_qa_csvfile_get_df(f"{qa_file_dir}/{qa_filename}")
-    print(f"{qa_filename} : {len(qa_file_df)} records")
     jira_issues_list = jira_manager.jira_get_all_issues(jira_project_key)
 
     for index, csv_row in qa_file_df.iterrows():
