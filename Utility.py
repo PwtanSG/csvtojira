@@ -166,3 +166,18 @@ def compare_data_row_csv_jira(csv_row_, jira_issue_):
     return jira_issue_.qn_no == csv_row_[required_cols[0]] and jira_issue_.summary == csv_row_['Title'] \
         and jira_issue_desc_text == csv_row_['Description']
 
+
+def get_cmd_main_fn_arg(default_fn, argv):
+    """
+    :param default_fn:
+    :param argv: execute main.py in cmd with filename argument pass in from cmd
+    :return: str - if found csv filename pass via argument else use default_fn
+    """
+    rtn_fn = default_fn
+    n = len(argv)
+    if n > 1 and argv[0] == "main.py":
+        print(f"{argv[0]}")
+        arg1 = argv[1]
+        if arg1.endswith("csv"):
+            rtn_fn = arg1
+    return rtn_fn
