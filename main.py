@@ -2,6 +2,7 @@
 # perform create/update to the records in Jira Project.
 
 from JiraManager import *
+import sys
 
 load_dotenv()
 jira_cloud_id = os.getenv('JIRA_CLOUD_ID')
@@ -12,17 +13,21 @@ jira_project_key = os.getenv('JIRA_PROJECT_KEY')
 auth = HTTPBasicAuth(jira_user, jira_api_token)
 jira_cloud_api_baseurl = f'{jira_cloud_api_endpoint}{jira_cloud_id}/rest/api/3'
 jira_project_info = ''
-qa_filename = 'csv/QA_20241012.csv'
+qa_file_ext = 'csv'
+qa_file_dir = 'csv'
+qa_filename = 'QA_20241012.csv'
 qa_file_df = ''
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+
     print('Start script...')
+    qa_filename = Utility.get_cmd_main_fn_arg(qa_filename, sys.argv)
     edit_count = 0
     create_count = 0
     jira_manager = JiraManager()
 
-    qa_file_df = Utility.read_qa_csvfile_get_df(qa_filename)
+    qa_file_df = Utility.read_qa_csvfile_get_df(f"{qa_file_dir}/{qa_filename}")
     print(f"{qa_filename} : {len(qa_file_df)} records")
     jira_issues_list = jira_manager.jira_get_all_issues(jira_project_key)
 

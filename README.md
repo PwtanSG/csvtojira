@@ -38,6 +38,13 @@ JIRA_CLOUD_ID=
 JIRA_CLOUD_API_ENDPOINT=
 JIRA_CUSTOM_FIELD_QN_NO=
 
+### CSV file location: 
+./csv
+
+### script usage
+CMD - takes 1 arg of csv filename
+py main.py filename.csv
+
 ### reference 
 JIRA REST API https://docs.atlassian.com/software/jira/docs/api/REST/1000.824.0/
 JIRA API TOKEN https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
