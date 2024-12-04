@@ -1,6 +1,7 @@
 # This is a sample Python script to load QA records in csv and
 # perform create/update to the records in Jira Project.
 
+# import Utility
 from JiraManager import *
 import sys
 
@@ -15,12 +16,11 @@ jira_cloud_api_baseurl = f'{jira_cloud_api_endpoint}{jira_cloud_id}/rest/api/3'
 jira_project_info = ''
 qa_file_ext = 'csv'
 qa_file_dir = 'csv'
-qa_filename = 'QA_20241012.csv'
+qa_filename = 'QA_EXAMPLE_FILE.csv'
 qa_file_df = ''
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-
     print('Start script...')
     qa_filename = Utility.get_cmd_main_fn_arg(qa_filename, sys.argv)
     edit_count = 0
