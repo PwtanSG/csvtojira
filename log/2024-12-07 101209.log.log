@@ -1,0 +1,4 @@
+2024-12-07 10:12:09 - logger - INFO - Start script....
+2024-12-07 10:12:09 - logger - INFO - Reading file : csv/QA_EXAMPLE_FILE.csv
+2024-12-07 10:12:09 - logger - INFO - csv/QA_EXAMPLE_FILE.csv : 14 records
+2024-12-07 10:12:10 - logger - INFO - Completed script... CSV records: 14 Edited: 0 Created: 0

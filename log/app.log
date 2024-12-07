@@ -1,0 +1,35 @@
+2024-12-06 09:58:36 - logger - INFO - Start script..????????????????
+2024-12-06 09:58:37 - logger - INFO - Completed script... CSV records: 14 Edited: 0 Created: 0
+2024-12-07 10:10 - INFO - Start script....
+2024-12-07 10:10 - INFO - Reading file : csv/QA_EXAMPLE_FILE.csv
+2024-12-07 10:10 - INFO - csv/QA_EXAMPLE_FILE.csv : 14 records
+2024-12-07 10:10 - INFO - Start script....
+2024-12-07 10:10 - INFO - Reading file : csv/QA_EXAMPLE_FILE.csv
+2024-12-07 10:10 - INFO - csv/QA_EXAMPLE_FILE.csv : 14 records
+2024-12-07 10:10 - DEBUG - Starting new HTTPS connection (1): api.atlassian.com:443
+2024-12-07 10:10 - DEBUG - https://api.atlassian.com:443 "GET /ex/jira/686be512-2f9e-4184-b027-d5d9968f33eb/rest/api/3/search?jql=project+%3DQI HTTP/11" 200 None
+2024-12-07 10:11 - INFO - Start script....
+2024-12-07 10:11 - INFO - Reading file : csv/QA_EXAMPLE_FILE.csv
+2024-12-07 10:11 - INFO - csv/QA_EXAMPLE_FILE.csv : 14 records
+2024-12-07 10:11 - DEBUG - Starting new HTTPS connection (1): api.atlassian.com:443
+2024-12-07 10:11 - DEBUG - https://api.atlassian.com:443 "GET /ex/jira/686be512-2f9e-4184-b027-d5d9968f33eb/rest/api/3/search?jql=project+%3DQI HTTP/11" 200 None
+2024-12-07 10:11 - INFO - Completed script... CSV records: 14 Edited: 0 Created: 0
+2024-12-07 10:12 - INFO - Start script....
+2024-12-07 10:12 - INFO - Reading file : csv/QA_EXAMPLE_FILE.csv
+2024-12-07 10:12 - INFO - csv/QA_EXAMPLE_FILE.csv : 14 records
+2024-12-07 10:12 - DEBUG - Starting new HTTPS connection (1): api.atlassian.com:443
+2024-12-07 10:12 - DEBUG - https://api.atlassian.com:443 "GET /ex/jira/686be512-2f9e-4184-b027-d5d9968f33eb/rest/api/3/search?jql=project+%3DQI HTTP/11" 200 None
+2024-12-07 10:12 - INFO - Completed script... CSV records: 14 Edited: 0 Created: 0
+2024-12-07 10:12 - INFO - Start script....
+2024-12-07 10:12 - INFO - Reading file : csv/QA_EXAMPLE_FILE.csv
+2024-12-07 10:12 - INFO - csv/QA_EXAMPLE_FILE.csv : 14 records
+2024-12-07 10:12 - DEBUG - Starting new HTTPS connection (1): api.atlassian.com:443
+2024-12-07 10:12 - DEBUG - https://api.atlassian.com:443 "GET /ex/jira/686be512-2f9e-4184-b027-d5d9968f33eb/rest/api/3/search?jql=project+%3DQI HTTP/11" 200 None
+2024-12-07 10:12 - INFO - Completed script... CSV records: 14 Edited: 0 Created: 0
+2024-12-07 10:12 - INFO - Start script....
+2024-12-07 10:12 - INFO - Reading file : csv/QA_EXAMPLE_FILE.csv
+2024-12-07 10:12 - INFO - csv/QA_EXAMPLE_FILE.csv : 14 records
+2024-12-07 10:12 - DEBUG - Starting new HTTPS connection (1): api.atlassian.com:443
+2024-12-07 10:12 - DEBUG - https://api.atlassian.com:443 "GET /ex/jira/686be512-2f9e-4184-b027-d5d9968f33eb/rest/api/3/search?jql=project+%3DQI HTTP/11" 200 None
+2024-12-07 10:12 - INFO - Jira project - QI : 15 records
+2024-12-07 10:12 - INFO - Completed script... CSV records: 14 Edited: 0 Created: 0
