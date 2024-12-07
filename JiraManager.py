@@ -26,7 +26,7 @@ class JiraManager:
     def get_class_name(self):
         return self.__class__.__name__
 
-    def jira_get_all_issues(self, project_key, logger_):
+    def jira_get_all_issues(self, project_key):
 
         url = f'{jira_cloud_api_baseurl}/search'
 
@@ -54,7 +54,6 @@ class JiraManager:
             self.issues.append(JiraIssue(issue['key'], issue['fields']['summary'],
                                          issue['fields'][jira_custom_field_qn_no],
                                          issue['fields']['description']))
-        logger_.info("Jira project - " + project_key + " : " + str(len(data['issues'])) + " records")
         return self.issues
 
     def jira_get_issue(self, issue_key):

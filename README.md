@@ -10,7 +10,7 @@ The JiraIssue class represents an individual Jira Issue with the following attri
 key: The key of the Quality Issue. \
 summary: The age of the Quality Issue. \
 description: The description of the Quality Issue. \
-qn_no: Quality Issue notification number (using Jira Customed field) \
+qn_no: Quality Issue notification number (using Jira Customed field)
 [QN no. format - 9 char long, prefix with 'QN' and 7 digit (e.g QN1234567)]
 
 ## JiraManager
@@ -46,6 +46,5 @@ CMD - takes 1 arg of csv filename
 py main.py filename.csv
 
 ### reference 
-JIRA REST API https://docs.atlassian.com/software/jira/docs/api/REST/1000.824.0/    \
-JIRA API TOKEN https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/   \
-Python logging https://docs.python.org/3/library/logging.html#logging.Logger \
+JIRA REST API https://docs.atlassian.com/software/jira/docs/api/REST/1000.824.0/
+JIRA API TOKEN https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
