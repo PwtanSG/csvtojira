@@ -26,7 +26,7 @@ class JiraManager:
     def get_class_name(self):
         return self.__class__.__name__
 
-    def jira_get_all_issues(self, project_key):
+    def jira_get_all_issues(self, project_key, logger_):
 
         url = f'{jira_cloud_api_baseurl}/search'
 
@@ -45,7 +45,7 @@ class JiraManager:
             params=query,
             auth=auth
         )
-        res = Utility.check_response('jira_get_all_issues', response)
+        res = Utility.check_response('jira_get_all_issues', response, logger_)
         if not res['result']:
             exit(1)
         data = json.loads(response.text)

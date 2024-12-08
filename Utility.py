@@ -1,4 +1,7 @@
 import json
+import logging
+from datetime import datetime
+
 import pandas as pd
 import pathlib
 import numpy as np
@@ -8,24 +11,24 @@ from JiraIssue import JiraIssue
 required_cols = ['QN no.', 'Title', 'Description']
 
 
-def check_file_exist(qa_file_pathname):
-    if qa_file_pathname:
-        filepath = pathlib.Path(qa_file_pathname)
+def check_file_exist(qa_file_pathname_, logger_):
+    if qa_file_pathname_:
+        filepath = pathlib.Path(qa_file_pathname_)
         if filepath.exists():
             # print(filepath)
             return filepath.exists()
         else:
-            print(f"Abort : File path/name not found - {qa_file_pathname}")
+            logger_.error(f"Abort : File path/name not found - {qa_file_pathname_}")
             exit(1)
     else:
-        print(f"Abort : File path/name not provided")
+        logger_.error(f"Abort : File path/name not provided")
         exit(1)
 
 
-def check_column_value_empty(dataframe, column_name):
+def check_column_value_empty(dataframe, column_name, logger_):
     result = dataframe[column_name].isnull().any()
     if result:
-        print(f'{column_name} column : Null data detected.')
+        logger_.error(f'{column_name} column : Null data detected.')
     return result
 
 
@@ -50,7 +53,7 @@ def check_no_duplicated_qn_no(qa_file_pathname, qa_file_df):
     return res
 
 
-def validate_qn_no_column(df_, column_to_validate):
+def validate_qn_no_column(df_, column_to_validate, logger_):
     """
     validate QN no. format - 9 char long, prefix with 'QN' and 7 digit (e.g QN1234567)
     :param df_:
@@ -66,7 +69,7 @@ def validate_qn_no_column(df_, column_to_validate):
         abort_msg = f'Abort : invalid QN no. found : '
         for i in range(invalid_found.size):
             abort_msg += df_[column_to_validate][i] + ' '
-        print(abort_msg)
+        logger_.error(abort_msg)
         exit(1)
 
     # enumerate method
@@ -77,26 +80,26 @@ def validate_qn_no_column(df_, column_to_validate):
     #         print(f'invalid QN no. found: {df_[column_to_validate][i]}')
 
 
-def read_qa_csvfile_get_df(qa_filename):
-    print(f"Reading file : {qa_filename}")
-    check_file_exist(qa_filename)
+def read_qa_csvfile_get_df(qa_filename_, logger_):
+    logger_.info(f"Reading file : {qa_filename_}")
+    check_file_exist(qa_filename_, logger_)
 
-    df = pd.read_csv(qa_filename, usecols=required_cols)
+    df = pd.read_csv(qa_filename_, usecols=required_cols)
     if df.empty:
-        print('No data in ' + qa_filename)
+        logger_.warning('No data in ' + qa_filename_)
         exit(1)
 
-    print(f"{qa_filename} : {len(df)} records")
+    logger_.info(f"{qa_filename_} : {str(len(df))} records")
 
-    check_column_value_empty(df, required_cols[0])
+    check_column_value_empty(df, required_cols[0], logger_)
 
-    no_dup_qn_no = check_no_duplicated_qn_no(qa_filename, df)
+    no_dup_qn_no = check_no_duplicated_qn_no(qa_filename_, df)
     if not no_dup_qn_no['result']:
-        print(no_dup_qn_no['result'])
-        print(no_dup_qn_no['msg'])
+        logger_.warning(no_dup_qn_no['result'])
+        logger_.warning(no_dup_qn_no['msg'])
         exit(1)
 
-    validate_qn_no_column(df, required_cols[0])
+    validate_qn_no_column(df, required_cols[0], logger_)
 
     # for ind in df.index:
     #     print(df['QN no.'][ind], df['Title'][ind])
@@ -129,22 +132,22 @@ def is_qn_no_in_jira(qn_no, jira_qn_dict_list_):
         return {'result': False, 'record': []}
 
 
-def check_response(func_name, response):
+def check_response(func_name, response, logger_):
     # print(f'{func_name} - status code : {response.status_code} {response.text}')
     if response.status_code >= 400:
-        print(f'{func_name} - status code : {response.status_code}')
+        logger_.info(f'{func_name} - status code : {response.status_code}')
         if response.text:
             try:
                 data = json.loads(response.text)
                 if isinstance(data, dict):
                     for key in data:
                         if key != 'JIRA_CLOUD_ID':
-                            print(f'{key} : {data[key]}')
+                            logger_.info(f'{key} : {data[key]}')
                 else:
-                    print(response.text)
+                    logger_.info(response.text)
                 # print(data['errorMessages'], f'Error: {response.status_code}{response.text}')['errorMessage' in data]
             except:
-                print(f'Error: {response.status_code}')
+                logger_.error(f'Error: {response.status_code}')
         return {"result": False, "status_code": response.status_code}
     return {"result": True, "status_code": response.status_code}
 
@@ -183,3 +186,31 @@ def get_cmd_main_fn_arg(default_fn, argv):
         if arg1.endswith("csv"):
             rtn_fn = arg1
     return rtn_fn
+
+
+def init_logging():
+
+    formatter = logging.Formatter(
+        "%(asctime)s : %(levelname)s : [%(filename)s:%(lineno)s - %(funcName)s()] : %(message)s",
+        "%Y-%m-%d %H:%M:%S")
+    logfile_path = "log/" + datetime.now().strftime("%Y-%m-%d_%H%M%S") + ".log"
+
+    # create log object
+    logger = logging.getLogger('logger')
+    logger.setLevel(logging.DEBUG)
+
+    # create log file handler
+    fh = logging.FileHandler(f"{logfile_path}", mode='w', encoding='utf-8')
+    # fh.setLevel(logging.DEBUG)
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+
+    # create console handler
+    ch = logging.StreamHandler()
+    # ch.setLevel(logging.DEBUG)
+    ch.setFormatter(formatter)
+    logger.addHandler(ch)
+
+    logger.info(f"Init logger : log file - {logfile_path}")
+
+    return logger

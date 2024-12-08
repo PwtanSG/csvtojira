@@ -1,6 +1,6 @@
 # This is a sample Python script to load QA records in csv and
 # perform create/update to the records in Jira Project.
-
+import Utility
 # import Utility
 from JiraManager import *
 import sys
@@ -21,14 +21,15 @@ qa_file_df = ''
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print('Start script...')
+    logger = Utility.init_logging()
+    logger.info('Start script...')
     qa_filename = Utility.get_cmd_main_fn_arg(qa_filename, sys.argv)
     edit_count = 0
     create_count = 0
     jira_manager = JiraManager()
 
-    qa_file_df = Utility.read_qa_csvfile_get_df(f"{qa_file_dir}/{qa_filename}")
-    jira_issues_list = jira_manager.jira_get_all_issues(jira_project_key)
+    qa_file_df = Utility.read_qa_csvfile_get_df(f"{qa_file_dir}/{qa_filename}", logger)
+    jira_issues_list = jira_manager.jira_get_all_issues(jira_project_key, logger)
 
     for index, csv_row in qa_file_df.iterrows():
         qn_no_in_jira = Utility.find_qn_in_jira(jira_issues_list, csv_row['QN no.'])
@@ -45,4 +46,6 @@ if __name__ == '__main__':
             if res['result']:
                 create_count += 1
 
-    print(f'Completed script... CSV records: {len(qa_file_df)} Edited: {edit_count} Created: {create_count}')
+    logger.info(
+        f'Completed script... CSV records: {str(len(qa_file_df))} Edited: {str(edit_count)} Created: {str(create_count)}')
+
